@@ -1,48 +1,27 @@
 package com.vti;
 
 import com.vti.entity.Department;
+import com.vti.repo.DepartmentRepoImpl;
+import com.vti.repo.IDepartmentRepo;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.vti.entity.Group;
-
 public class TestProgram {
 	
 	public static void main(String[] args) {
-		// get session
-		Session session = null;
-		try {
-			session = buildSessionFactory().openSession();
 
-			Department department = new Department();
-			department.setName("Research 1");
+		IDepartmentRepo departmentRepo = new DepartmentRepoImpl();
 
-			session.save(department);
+		// get List:
+//		List<Department> departmentList = departmentRepo.getAllDepartments();
+//		departmentList.forEach(System.out::println);
 
-			System.out.println("Create success!");
-
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
-
-	private static SessionFactory buildSessionFactory() {
-		// load configuration
-		Configuration configuration = new Configuration();
-		configuration.configure("hibernate.cfg.xml");
-
-		// add entity
-		configuration.addAnnotatedClass(Group.class);
-		configuration.addAnnotatedClass(Department.class);
-
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-				.applySettings(configuration.getProperties()).build();
-
-		return configuration.buildSessionFactory(serviceRegistry);
+		//get one: id: 10
+		Department department10 = departmentRepo.getOne(10);
+		System.out.println(department10);
 	}
 }
