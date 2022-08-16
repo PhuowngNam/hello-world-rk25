@@ -9,4 +9,5 @@ public interface IDepartmentRepo {
     Department create(Department department);
     Department update(int id, Department department);
     Department delete(int id);
+    Boolean isExistedById(int id);
 }

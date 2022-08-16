@@ -66,11 +66,34 @@ public class DepartmentRepoImpl implements IDepartmentRepo {
 
     @Override
     public Department update(int id, Department department) {
-        return null;
+        Session session = null;
+        
+        try {
+            session = hibernateUtils.openSession();
+            session.beginTransaction();
+            // validate id exists
+            if (isExistedById(id)) {
+                department.setId(id);
+                session.update(department);
+            }
+            session.getTransaction().commit();
+            return department;
+
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public Department delete(int id) {
         return null;
+    }
+
+    @Override
+    public Boolean isExistedById(int id) {
+        Department department = getOne(id);
+        return department != null;
     }
 }

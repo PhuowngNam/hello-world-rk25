@@ -42,4 +42,15 @@ public class Department {
             ", name='" + name + '\'' +
             '}';
     }
+
+
+    public Department id(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Department name(String name) {
+        this.name = name;
+        return this;
+    }
 }

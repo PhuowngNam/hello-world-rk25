@@ -16,8 +16,13 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public Group() {
+    }
+
     @Column(name = "name")
+
     private String name;
+
 
     public int getId() {
         return id;
