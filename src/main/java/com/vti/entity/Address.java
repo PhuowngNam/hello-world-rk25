@@ -1,6 +1,7 @@
 package com.vti.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,9 +30,12 @@ public class Address implements Serializable {
     @Column(name = "city", length = 255)
     private String city;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @OneToMany(mappedBy = "address")
+    private List<UserAddress> userAddressList;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getId() {
         return id;
@@ -56,32 +61,12 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public User getUser() {
-        return user;
+    public List<UserAddress> getUserAddressList() {
+        return userAddressList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Address id(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    public Address street(String street) {
-        this.street = street;
-        return this;
-    }
-
-    public Address city(String city) {
-        this.city = city;
-        return this;
-    }
-
-    public Address user(User user) {
-        this.user = user;
-        return this;
+    public void setUserAddressList(List<UserAddress> userAddressList) {
+        this.userAddressList = userAddressList;
     }
 
     @Override
@@ -90,6 +75,7 @@ public class Address implements Serializable {
             "id=" + id +
             ", street='" + street + '\'' +
             ", city='" + city + '\'' +
+            ", userAddressList=" + userAddressList +
             '}';
     }
 }

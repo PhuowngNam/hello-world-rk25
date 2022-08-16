@@ -55,6 +55,18 @@ public class TestProgram {
 //
 //        addressRepo.create(newAddress);
 
-        userRepo.getAll().forEach(System.out::println);
+        userRepo.getAll().forEach(user -> {
+            System.out.println(String.format("%s - %s", user.getId(), user.getUsername()));
+            user.getUserAddressList().forEach(userAddress -> {
+                System.out.println(userAddress.getAddress());
+            });
+        });
+
+        addressRepo.getAll().forEach(address -> {
+            System.out.println(String.format("%s - %s", address.getId(), address.getCity()));
+            address.getUserAddressList().forEach(userAddress -> {
+                System.out.println(userAddress.getUser());
+            });
+        });
     }
 }

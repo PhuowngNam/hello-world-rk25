@@ -24,7 +24,7 @@ public class User {
     private String username;
 
     @OneToMany(mappedBy = "user")
-    private List<Address> addressList;
+    private List<UserAddress> userAddressList;
 
     public Integer getId() {
         return id;
@@ -52,12 +52,12 @@ public class User {
         return this;
     }
 
-    public List<Address> getAddressList() {
-        return addressList;
+    public List<UserAddress> getUserAddressList() {
+        return userAddressList;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
+    public void setUserAddressList(List<UserAddress> userAddressList) {
+        this.userAddressList = userAddressList;
     }
 
     @Override
@@ -65,12 +65,7 @@ public class User {
         return "User{" +
             "id=" + id +
             ", username='" + username + '\'' +
-            ", addressList=" + addressList +
+            ", userAddressList=" + userAddressList +
             '}';
-    }
-
-    public User addressList(List<Address> addressList) {
-        this.addressList = addressList;
-        return this;
     }
 }
